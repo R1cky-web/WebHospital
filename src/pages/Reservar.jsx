@@ -21,7 +21,7 @@ export default function Reservar() {
   const [selectedDate, setSelectedDate] = useState('')
   const [availableSlots, setAvailableSlots] = useState([])
   const [selectedSlot, setSelectedSlot] = useState(null)
-  const [form, setForm] = useState({ name: '', phone: '', email: '' })
+  const [form, setForm] = useState({ name: '', dni: '', phone: '', email: '' })
   const [success, setSuccess] = useState(null)
 
   const today = new Date()
@@ -59,7 +59,7 @@ export default function Reservar() {
     e.preventDefault()
     if (!selectedSlot) return
     const appointment = {
-      patientName: form.name, patientPhone: form.phone, patientEmail: form.email,
+      patientName: form.name, patientDni: form.dni, patientPhone: form.phone, patientEmail: form.email,
       specialtyId: Number(selectedSpecialtyId), doctorId: Number(selectedDoctorId),
       date: selectedDate, day: getDayName(selectedDate), time: selectedSlot.time,
       queueNumber: getNextQueueNumber(selectedDate, selectedSpecialtyId), status: 'confirmed',
@@ -213,6 +213,10 @@ export default function Reservar() {
                 <div className="form-group">
                   <label className="form-label">Nombre Completo *</label>
                   <input className="form-input" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Ingrese su nombre" />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">DNI *</label>
+                  <input className="form-input" required value={form.dni} onChange={e => setForm(f => ({ ...f, dni: e.target.value }))} placeholder="12345678" maxLength={8} inputMode="numeric" />
                 </div>
                 <div className="form-row-2">
                   <div className="form-group">

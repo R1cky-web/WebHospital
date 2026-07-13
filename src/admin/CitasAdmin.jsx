@@ -65,7 +65,7 @@ export default function CitasAdmin() {
                       <td>#{app.queueNumber}</td>
                       <td>
                         <strong>{app.patientName}</strong>
-                        <br /><small style={{ color: 'var(--gray-500)' }}>{app.patientPhone}</small>
+                        <br /><small style={{ color: 'var(--gray-500)' }}>DNI: {app.patientDni || '—'} | {app.patientPhone}</small>
                       </td>
                       <td>{specialty?.name}</td>
                       <td>{doctor?.name}</td>

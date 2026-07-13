@@ -71,8 +71,8 @@ export function AppProvider({ children }) {
       .sort((a, b) => a.queueNumber - b.queueNumber)
   }, [data.appointments])
 
-  const getNextQueueNumber = useCallback((date, specialtyId) => {
-    const today = data.appointments.filter(a => a.date === date && a.specialtyId === Number(specialtyId))
+  const getNextQueueNumber = useCallback((date, _specialtyId) => {
+    const today = data.appointments.filter(a => a.date === date)
     return today.length + 1
   }, [data.appointments])
 

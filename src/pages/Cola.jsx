@@ -4,22 +4,25 @@ import { useAuth } from '../contexts/AuthContext'
 import './Cola.css'
 
 export default function Cola() {
-  const { data, getSpecialty, getDoctor, getQueueByDateAndSpecialty, updateAppointmentStatus } = useApp()
+  const { data, getSpecialty, getDoctor, updateAppointmentStatus } = useApp()
   const { user } = useAuth()
   const isAdmin = user?.role === 'admin'
-  const [filterDate, setFilterDate] = useState(new Date().toISOString().slice(0, 10))
+  const [filterDate, setFilterDate] = useState('')
   const [filterSpecialty, setFilterSpecialty] = useState('')
 
-  const filteredQueue = filterSpecialty
-    ? getQueueByDateAndSpecialty(filterDate, filterSpecialty)
-    : data.appointments.filter(a => a.date === filterDate).sort((a, b) => a.queueNumber - b.queueNumber)
+  const filteredQueue = (() => {
+    let result = data.appointments
+    if (filterDate) result = result.filter(a => a.date === filterDate)
+    if (filterSpecialty) result = result.filter(a => a.specialtyId === Number(filterSpecialty))
+    return result.sort((a, b) => a.date.localeCompare(b.date) || a.queueNumber - b.queueNumber)
+  })()
 
   const now = new Date()
   const currentTimeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
 
-  const activeCount = filteredQueue.filter(a => a.status === 'confirmed' || a.status === 'pending').length
-  const attendedCount = filteredQueue.filter(a => a.status === 'attended').length
-  const cancelledCount = filteredQueue.filter(a => a.status === 'cancelled').length
+  const activeCount = data.appointments.filter(a => a.status === 'confirmed' || a.status === 'pending').length
+  const attendedCount = data.appointments.filter(a => a.status === 'attended').length
+  const cancelledCount = data.appointments.filter(a => a.status === 'cancelled').length
 
   return (
     <div className="cola-page">
@@ -63,8 +66,8 @@ export default function Cola() {
         {filteredQueue.length === 0 ? (
           <div className="cola-empty">
             <div className="cola-empty-icon">📭</div>
-            <h3>No hay citas para esta fecha</h3>
-            <p>No se encontraron citas agendadas para los filtros seleccionados.</p>
+            <h3>No hay citas registradas</h3>
+            <p>Aún no se han agendado citas. Reserve una para verla aquí.</p>
           </div>
         ) : (
           <div className="cola-list">
@@ -81,12 +84,13 @@ export default function Cola() {
                   </div>
                   <div className="cola-item-info">
                     <div className="cola-item-name">{app.patientName}</div>
+                    <div className="cola-item-dni">DNI: {app.patientDni || '—'}</div>
                     <div className="cola-item-meta">
                       <span>{specialty?.icon} {specialty?.name}</span>
                       <span>👨‍⚕️ {doctor?.name}</span>
                     </div>
                   </div>
-                  <div className="cola-item-time">{app.time}</div>
+                  <div className="cola-item-time">{app.date}<br /><span className="cola-item-time-hour">{app.time}</span></div>
                   <div className="cola-item-status">
                     {app.status === 'cancelled' ? <span className="status-badge cancelled">Cancelada</span>
                     : app.status === 'attended' ? <span className="status-badge attended">Atendido</span>

@@ -80,9 +80,11 @@
 
 .cola-item-info { flex: 1; }
 .cola-item-name { font-weight: 600; font-size: 0.95rem; }
+.cola-item-dni { font-size: 0.82rem; color: var(--gray-600); margin-top: 0.1rem; font-weight: 500; }
 .cola-item-meta { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--gray-500); margin-top: 0.2rem; flex-wrap: wrap; }
 
-.cola-item-time { font-weight: 700; font-size: 1rem; color: var(--dark); min-width: 50px; text-align: center; }
+.cola-item-time { font-weight: 600; font-size: 0.75rem; color: var(--gray-500); min-width: 60px; text-align: center; line-height: 1.3; }
+.cola-item-time-hour { font-weight: 700; font-size: 1rem; color: var(--dark); }
 
 .status-badge {
   display: inline-block;
