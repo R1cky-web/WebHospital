@@ -1,0 +1,138 @@
+.horarios-page { }
+
+.horarios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.horarios-header h1 { font-size: 1.6rem; margin-bottom: 0.3rem; }
+.horarios-header p { color: var(--gray-500); font-size: 0.9rem; }
+
+.horarios-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.horarios-form-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  border: 1px solid var(--gray-200);
+  animation: fadeIn 0.3s ease;
+}
+.horarios-form-card h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+
+.horarios-doctors-section {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  border: 1px solid var(--gray-200);
+}
+.horarios-doctors-section h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+
+.doctors-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.doctor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gray-100);
+  padding: 0.4rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  border: 1px solid var(--gray-200);
+}
+.doctor-chip-spec { color: var(--gray-500); font-size: 0.8rem; }
+.doctor-chip-del {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0 0.2rem;
+}
+
+.day-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.day-tab {
+  flex: 1;
+  min-width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.7rem 0.5rem;
+  border: 2px solid var(--gray-200);
+  border-radius: 14px;
+  background: var(--white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+.day-tab:hover { border-color: var(--gray-300); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.day-tab span:first-child { font-weight: 700; font-size: 0.9rem; }
+.day-tab-count { font-size: 0.7rem; opacity: 0.6; font-weight: 500; }
+
+.schedule-cards { display: grid; gap: 1rem; }
+.schedule-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  border-left: 5px solid var(--primary);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  transition: all 0.3s ease;
+}
+.schedule-card:hover { transform: translateX(4px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.schedule-card-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+.schedule-spec { font-weight: 600; font-size: 0.95rem; }
+.schedule-doctor { color: var(--gray-600); font-size: 0.9rem; }
+.schedule-card-bottom { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.schedule-time, .schedule-patients { font-size: 0.85rem; color: var(--gray-500); }
+.schedule-card-actions { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--gray-100); display: flex; gap: 0.5rem; }
+
+.horarios-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+.empty-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+.horarios-empty h3 { color: var(--gray-700); margin-bottom: 0.5rem; }
+.horarios-empty p { color: var(--gray-500); font-size: 0.9rem; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 640px) {
+  .horarios-header { flex-direction: column; }
+  .horarios-header h1 { font-size: 1.3rem; }
+  .horarios-actions { width: 100%; }
+  .horarios-actions .btn { flex: 1; font-size: 0.8rem; padding: 0.5rem 0.75rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .horarios-form-card { padding: 1rem; }
+  .horarios-form-card h3 { font-size: 1rem; }
+
+  .day-tabs { gap: 0.3rem; }
+  .day-tab { min-width: 0; flex: 1; padding: 0.5rem 0.3rem; }
+  .day-tab span:first-child { font-size: 0.75rem; }
+  .day-tab-count { font-size: 0.6rem; }
+
+  .schedule-card { padding: 1rem; }
+  .schedule-card-top { flex-direction: column; align-items: flex-start; }
+  .schedule-spec { font-size: 0.9rem; }
+  .schedule-doctor { font-size: 0.8rem; }
+  .schedule-card-bottom { flex-direction: column; gap: 0.3rem; }
+  .schedule-card-actions { flex-direction: column; }
+  .schedule-card-actions .btn { width: 100%; }
+
+  .doctor-chip { font-size: 0.8rem; padding: 0.35rem 0.6rem; }
+}
